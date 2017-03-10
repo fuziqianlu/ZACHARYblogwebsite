@@ -1,0 +1,47 @@
+body{
+  padding-top: 50px;
+}
+
+.blog-post {
+  margin-bottom: 30px;
+}
+.blog-post-title {
+  margin-bottom: 5px;
+}
+.blog-post-title a{
+  color: #6a6a6a;
+}
+.blog-post-meta {
+  margin-bottom: 15px;
+  color: #999;
+  font-size: 14px;
+}
+.blog-post-content {
+  font-size: 15px;
+}
+
+.comment-list{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.comment-list .page-header{
+  color: #777;
+}
+.comment-list .create-comment{
+  margin-bottom: 20px;
+}
+.comment-list .create-comment .btn-publish{
+  margin-top: 10px;
+}
+.comment-list li{
+  margin-bottom: 15px;
+}
+.comment-list li .avatar{
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  margin-right: 20px;
+}
+.comment-list li .date{
+  margin-right: 15px;
+}

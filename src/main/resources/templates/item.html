@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title th:text="${blog.title}">Cum sociis</title>
+  <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/footer.css">
+  <link rel="stylesheet" href="/css/sidbar.css">
+  <link rel="stylesheet" href="/css/blog.css">
+  <link rel="stylesheet" href="/css/highlight.css">
+  <script src="//cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/about">ZACHARY BLOG WEBSITE</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="/about">首页</a></li>
+        <li><a href="#">最近</a></li>
+        <li><a href="#">归档</a></li>
+        <li><a href="#">关于</a></li>
+      </ul>
+      <form class="navbar-form navbar-right" action="/search" method="get">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="关键字/用户名" name="key">
+        </div>
+        <button type="submit" class="btn btn-default">搜索</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-sm-8 blog-item">
+      <div class="page-header"  th:object="${blog}">
+        <h2 th:text="${blog.title}">Cum sociis</h2>
+        <p class="blog-post-meta" th:text="${#dates.format(blog.createdTime, 'yyyy-MM-dd')}">2015年2月3日 标签：<a href="#">Web开发</a></p>
+      </div>
+
+      <div class="post-content" th:utext="${blog.content}" th:object="${blog}">
+        <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic
+          typography, images, and code are all supported.</p>
+        <blockquote>
+          <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo.
+            Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+        </blockquote>
+        <h3>Sub-heading</h3>
+
+        <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+        <div class="highlight">
+<pre><code class="language-js" data-lang="js"><span class="c1">// 引入jwt</span>
+  <span class="kd">var</span> <span class="nx">jwt</span> <span class="o">=</span> <span class="nx">require</span><span
+          class="p">(</span><span class="s1">'jwt-simple'</span><span class="p">);</span>
+
+  <span class="c1">// 设置一个客户端不知道的secret</span>
+  <span class="kd">var</span> <span class="nx">secret</span> <span class="o">=</span> <span class="s1">'hehe'</span>
+
+  <span class="c1">// username -&gt; Token</span>
+  <span class="nx">User</span><span class="p">.</span><span class="nx">methods</span><span class="p">.</span><span
+          class="nx">getToken</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="k">return</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">encode</span><span
+          class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">username</span><span
+          class="p">,</span> <span class="nx">secret</span><span class="p">);</span>
+  <span class="p">}</span></code></pre>
+        </div>
+        <p>Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus,
+          tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+
+        <h3>Sub-heading</h3>
+
+        <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum
+          nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus
+          commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+        <ul>
+          <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
+          <li>Donec id elit non mi porta gravida at eget metus.</li>
+          <li>Nulla vitae elit libero, a pharetra augue.</li>
+        </ul>
+        <p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>
+        <ol>
+          <li>Vestibulum id ligula porta felis euismod semper.</li>
+          <li>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
+          <li>Maecenas sed diam eget risus varius blandit sit amet non magna.</li>
+        </ol>
+        <p>Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at lobortis.</p>
+      </div>
+
+      <nav>
+        <ul class="pager">
+          <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> 上一篇</a></li>
+          <li class="next"><a href="#">下一篇 <span aria-hidden="true">&rarr;</span></a></li>
+        </ul>
+      </nav>
+
+      <section class="comment-list">
+        <h4 class="page-header">文章评论</h4>
+        
+	       <div class="create-comment clearfix">
+	        <form method="post" th:action="@{'/blogs/'+${comment.blog.id}+'/comments?next=/blogs/'+${comment.blog.id}}" th:object="${comment}">
+	          <input type="text" id="content" name="content"
+	                    class="form-control" placeholder="添加新评论" th:field="*{content}">
+	          <input type="submit" class="btn btn-success btn-sm btn-publish pull-right" value="发表评论">
+	          </form>
+	       </div>
+       
+        <ul class="list-unstyled">
+          <li class="clearfix comment-item" th:each="commen:${comments}">
+            <img src="/img/catty.jpeg" alt="" class="avatar pull-left">&nbsp;&nbsp;<a th:href="'/'+${commen.commentor.name}" th:text="'用户：'+${commen.commentor.name}"></a>
+            <br/>
+            <p class="content" th:text="${commen.content}" style="margin:20px">
+              <a href="#">Harttle,</a>
+              <span class="text-muted date"> 2 mins ago</span>
+              Risus. Suspendisse faucibus orci et nunc. Nullam vehicula fermentum risus. Fusce felis nibh, dignissim
+              vulputate, ultrices.
+            </p>
+            <p th:text="${#dates.format(commen.createdTime, 'yyyy-MM-dd')}"></p>
+          </li>
+          <li class="clearfix" th:remove="all">
+            <img src="/img/catty.jpeg" alt="" class="avatar pull-left">
+            <p class="content">
+              <a href="#">David</a>
+              <span class="text-muted date">, yesterday</span>
+              Risus. Suspendisse faucibus orci et nunc. Nullam vehicula fermentum risus. Fusce felis nibh, dignissim
+              vulputate, ultrices.</p>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+
+
+    <div class="col-sm-3 col-sm-offset-1" th:object="${user}">
+      <div class="sidebar-module sidebar-module-inset">
+        <div class="avatar">
+          <img class="img-circle img-rounded img-thumbnail avatar" th:src="@{'/profile/'+${user.name}}">
+          <div>
+            <h4><a th:text="${user.name}" th:href="'/'+${user.name}">Lorem</a></h4><br/>
+            <a type="email" th:text="${user.email}">lorem@example.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-module">
+        <h4>归档</h4>
+        <ol class="list-unstyled">
+          <li><a href="#">2015年03月</a></li>
+          <li><a href="#">2015年02月</a></li>
+          <li><a href="#">2015年01月</a></li>
+          <li><a href="#">2014年12月</a></li>
+          <li><a href="#">2014年11月</a></li>
+          <li><a href="#">2014年10月</a></li>
+          <li><a href="#">2014年09月</a></li>
+          <li><a href="#">2014年08月</a></li>
+          <li><a href="#">2014年07月</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  &copy; 2014 SomeCompany, Org &middot; <a href="#">隐私</a> &middot; <a href="#">条款</a>
+</footer>
+
+</body>
+</html>

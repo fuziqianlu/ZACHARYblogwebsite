@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>用户设置</title>
+  <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/css/footer.css">
+  <link rel="stylesheet" href="../static/css/sidbar.css">
+  <link rel="stylesheet" href="../static/css/blog.css">
+  <link rel="stylesheet" href="../static/css/highlight.css">
+</head>
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/about">ZACHARY BLOG WEBSITE</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="/about">首页</a></li>
+        <li><a href="#">最近</a></li>
+        <li><a href="#">归档</a></li>
+        <li><a href="#">关于</a></li>
+      </ul>
+      <form class="navbar-form navbar-right" action="/search" method="get">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="关键字/用户名" name="key">
+        </div>
+        <button type="submit" class="btn btn-default">搜索</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <h1>用户设置</h1>
+  <hr>
+  <div class="row">
+
+    <form class="form-horizontal" role="form"  th:object="${user}" enctype="multipart/form-data" th:action="@{/profile}"
+    method="post">
+
+    <!-- left column -->
+    <div class="col-md-3">
+      <div class="text-center">
+        <img th:src="@{'/profile/'+${user.name}}" style="width:100px;height:100px;" class="avatar img-circle" alt="avatar">
+        <h6>上传头像</h6>
+        <input type="file" class="form-control" name="file">
+      </div>
+    </div>
+
+    <!-- edit form column -->
+    <div class="col-md-9 personal-info">
+      <div class="alert alert-info alert-dismissable" th:unless="${#strings.isEmpty(message)}" th:text="${message}">
+        <a class="panel-close close" data-dismiss="alert">×</a>
+        This is an <strong>.alert</strong>. Use this to show important messages to the user.
+      </div>
+      <h3>个人信息</h3>
+
+        <div class="form-group">
+          <label class="col-lg-3 control-label">用户名字:</label>
+          <div class="col-lg-8">
+            <input class="form-control" type="text" th:field="*{name}" name="name">
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">username should be valid</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">电子邮件:</label>
+          <div class="col-lg-8">
+            <input class="form-control" type="email" name="email" th:field="*{email}" >
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email should be valid</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label">密码:</label>
+          <div class="col-md-8">
+            <input class="form-control" type="password" name="password" th:field="*{password}" >
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password should be valid</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label"></label>
+          <div class="col-md-8">
+            <button type="submit" class="btn btn-primary" value="更新">更新</button>
+          </div>
+        </div>
+    </div>
+    </form>
+  </div>
+</div>
+<hr>
+
+</body>
+</html>
